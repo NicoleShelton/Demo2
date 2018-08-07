@@ -1,7 +1,6 @@
-package com.example.demo2.agent.imp;
+package com.example.demo2.agent.impl;
 
 import com.example.demo2.agent.UserAgent;
-import com.example.demo2.api.UserController;
 import com.example.demo2.model.internal.User;
 import com.example.demo2.model.internal.request.GetUserRequest;
 import com.example.demo2.model.internal.response.GetUserResponse;
@@ -9,7 +8,6 @@ import com.example.demo2.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
