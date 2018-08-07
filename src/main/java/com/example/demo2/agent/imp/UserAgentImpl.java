@@ -27,36 +27,13 @@ public class UserAgentImpl implements UserAgent{
         try {
             final User user = userService.getUserById(request.getId());
             if(user != null){
-                final GetUserResponse.User user = new GetUserResponse.User()
-                        .setFirstName(externalUser.getFirstName())
-                        .setLastName(externalUser.getLastName())
-                        .setId(externalUser.getId())
-                        .setJobTitle(externalUser.getJobTitle())
-                        .setLocationId(externalUser.getLocationId());
-                response.setUser(user);
-            }
-
-
-
-            final RestTemplate restTemplate = new RestTemplate();
-            final String url = "http://localhost:9999/user/get-by-id";
-            final com.example.demo2.model.external.request.GetUserRequest externalGetUserRequest =
-                    new com.example.demo2.model.external.request.GetUserRequest().setId(request.getId());
-
-            final com.example.demo2.model.external.response.GetUserResponse externalGetUserResponse =
-                    restTemplate.postForObject(url, externalGetUserRequest, com.example.demo2.model.external.response.GetUserResponse.class);
-
-            if(externalGetUserResponse != null){
-                final com.example.demo2.model.external.response.GetUserResponse.User externalUser =
-                        externalGetUserResponse.getUser();
-
-                final GetUserResponse.User user = new GetUserResponse.User()
-                        .setFirstName(externalUser.getFirstName())
-                        .setLastName(externalUser.getLastName())
-                        .setId(externalUser.getId())
-                        .setJobTitle(externalUser.getJobTitle())
-                        .setLocationId(externalUser.getLocationId());
-                response.setUser(user);
+                final GetUserResponse.User responseUser = new GetUserResponse.User()
+                        .setFirstName(user.getFirstName())
+                        .setLastName(user.getLastName())
+                        .setId(user.getId())
+                        .setJobTitle(user.getJobTitle())
+                        .setLocationId(user.getLocationId());
+                response.setUser(responseUser);
             }
         } catch (Exception e) {
             LOG.error("Error getting user data.", e);
