@@ -15,6 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 
 @Service
 public class ItemAgentImpl implements ItemAgent{
@@ -37,9 +40,35 @@ public class ItemAgentImpl implements ItemAgent{
                 if(item != null) {
                     final Long createUserId = item.getCreateUserId();
                     final Long expireUserId = item.getExpireUserId();
-                    final User createUser = createUserId != null ? userService.getUserById(createUserId) : null;
-                    final User expireUser = expireUserId != null ? userService.getUserById(expireUserId) : null;
+                    final ForkJoinPool threadPool = new ForkJoinPool(2);
 
+                    final Future<User> createUserFuture;
+                    final Future<User> expireUserFuture;
+
+                    if(createUserId != null){
+                        createUserFuture = threadPool.submit(new Callable<User>() {
+                            @Override
+                            public User call() throws Exception {
+                                return userService.getUserById(createUserId);
+                            }
+                        });
+                    } else {
+                        createUserFuture = null;
+                    }
+
+                    if(expireUserId != null){
+                        expireUserFuture = threadPool.submit(new Callable<User>() {
+                            @Override
+                            public User call() throws Exception {
+                                return userService.getUserById(expireUserId);
+                            }
+                        });
+                    } else {
+                        expireUserFuture = null;
+                    }
+
+                    final User createUser = createUserFuture != null ? createUserFuture.get() : null;
+                    final User expireUser = expireUserFuture != null ? expireUserFuture.get() : null;
                     final GetItemResponse.User responseCreateUser = createUser == null ? null : new GetItemResponse.User()
                             .setId(createUser.getId())
                             .setFistName(createUser.getFirstName())

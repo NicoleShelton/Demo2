@@ -6,11 +6,16 @@ import com.example.demo2.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Resource
+    private RestTemplate restTemplate;
+
     @Override
     public User getUserById(Long userId) {
-        final RestTemplate restTemplate = new RestTemplate();
         final String url = "http://localhost:9999/user/get-by-id";
         final com.example.demo2.model.external.request.GetUserRequest externalGetUserRequest =
                 new com.example.demo2.model.external.request.GetUserRequest().setId(userId);
