@@ -22,13 +22,16 @@ public class UserServiceImpl implements UserService {
         if(externalGetUserResponse != null) {
             final com.example.demo2.model.external.response.GetUserResponse.User externalUser =
                     externalGetUserResponse.getUser();
-
-            user = new User()
-                    .setFirstName(externalUser.getFirstName())
-                    .setLastName(externalUser.getLastName())
-                    .setId(externalUser.getId())
-                    .setJobTitle(externalUser.getJobTitle())
-                    .setLocationId(externalUser.getLocationId());
+            if(externalUser != null) {
+                user = new User()
+                        .setFirstName(externalUser.getFirstName())
+                        .setLastName(externalUser.getLastName())
+                        .setId(externalUser.getId())
+                        .setJobTitle(externalUser.getJobTitle())
+                        .setLocationId(externalUser.getLocationId());
+            } else {
+                user = null;
+            }
         } else {
             user = null;
         }

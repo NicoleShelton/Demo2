@@ -2,8 +2,10 @@ package com.example.demo2.dao.impl;
 
 import com.example.demo2.dao.ItemDao;
 import com.example.demo2.model.internal.Item;
+import com.example.demo2.utility.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -49,5 +51,42 @@ public class ItemDaoImpl implements ItemDao {
                 return item;
             }
         });
+    }
+
+    @Override
+    public Long getItemIdNextValue() {
+        final String sql ="SELECT item_id_seq.NEXTVAL As nextvalue FROM dual";
+        
+        
+        return namedParameterJdbcTemplate.query(sql, EmptySqlParameterSource.INSTANCE, new ResultSetExtractor<Long>() {
+            @Override
+            public Long extractData(ResultSet rs) throws SQLException, DataAccessException {
+                return rs.next() ? rs.getLong("nextvalue") : null;
+            }
+        });
+    }
+
+    @Override
+    public boolean createItem(Long itemId, String csn, String description, Long createUserId) {
+        final String sql = "" +
+                "INSERT INTO item ( " +
+                "  item_id, " +
+                "  csn, " +
+                "  description, " +
+                "  create_user_id " +
+                ") VALUES ( " +
+                "  :itemId, " +
+                "  :csn, " +
+                "  :description, " +
+                "  :createUserId " +
+                ");";
+
+        final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
+                .addValue("itemId", itemId)
+                .addValue("csn", csn)
+                .addValue("description", description)
+                .addValue("createUserId", createUserId);
+
+        return namedParameterJdbcTemplate.update(sql, parameterSource) == 1;
     }
 }
