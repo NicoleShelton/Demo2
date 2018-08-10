@@ -13,7 +13,7 @@ public class GetSerialItemResponse {
         private String csn;
         private String description;
         private User createUser;
-        private User expireUser;
+//        private User expireUser;
 
         public Long getSerialItemId() {
             return serialItemId;
@@ -69,14 +69,14 @@ public class GetSerialItemResponse {
             return this;
         }
 
-        public User getExpireUser() {
-            return expireUser;
-        }
-
-        public Item setExpireUser(User expireUser) {
-            this.expireUser = expireUser;
-            return this;
-        }
+//        public User getExpireUser() {
+//            return expireUser;
+//        }
+//
+//        public Item setExpireUser(User expireUser) {
+//            this.expireUser = expireUser;
+//            return this;
+//        }
     }
 
     public static class User {

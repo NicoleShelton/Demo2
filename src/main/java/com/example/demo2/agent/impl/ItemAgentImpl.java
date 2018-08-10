@@ -143,11 +143,11 @@ public class ItemAgentImpl implements ItemAgent{
                 final Item serialItem = itemDao.getSerialItemById(serialItemId);
                 if(serialItem != null) {
                     final Long createUserId = serialItem.getCreateUserId();
-                    final Long expireUserId = serialItem.getExpireUserId();
+//                    final Long expireUserId = serialItem.getExpireUserId();
                     final ForkJoinPool threadPool = new ForkJoinPool(2);
 
                     final Future<User> createUserFuture;
-                    final Future<User> expireUserFuture;
+//                    final Future<User> expireUserFuture;
 
                     if(createUserId != null){
                         createUserFuture = threadPool.submit(new Callable<User>() {
@@ -160,28 +160,28 @@ public class ItemAgentImpl implements ItemAgent{
                         createUserFuture = null;
                     }
 
-                    if(expireUserId != null){
-                        expireUserFuture = threadPool.submit(new Callable<User>() {
-                            @Override
-                            public User call() throws Exception {
-                                return userService.getUserById(expireUserId);
-                            }
-                        });
-                    } else {
-                        expireUserFuture = null;
-                    }
+//                    if(expireUserId != null){
+//                        expireUserFuture = threadPool.submit(new Callable<User>() {
+//                            @Override
+//                            public User call() throws Exception {
+//                                return userService.getUserById(expireUserId);
+//                            }
+//                        });
+//                    } else {
+//                        expireUserFuture = null;
+//                    }
 
                     final User createUser = createUserFuture != null ? createUserFuture.get() : null;
-                    final User expireUser = expireUserFuture != null ? expireUserFuture.get() : null;
+//                    final User expireUser = expireUserFuture != null ? expireUserFuture.get() : null;
                     final GetSerialItemResponse.User responseCreateUser = createUser == null ? null : new GetSerialItemResponse.User()
                             .setId(createUser.getId())
                             .setFistName(createUser.getFirstName())
                             .setLastName(createUser.getLastName());
 
-                    final GetSerialItemResponse.User responseExpireUser = expireUser == null ? null : new GetSerialItemResponse.User()
-                            .setId(expireUser.getId())
-                            .setFistName(expireUser.getFirstName())
-                            .setLastName(expireUser.getLastName());
+//                    final GetSerialItemResponse.User responseExpireUser = expireUser == null ? null : new GetSerialItemResponse.User()
+//                            .setId(expireUser.getId())
+//                            .setFistName(expireUser.getFirstName())
+//                            .setLastName(expireUser.getLastName());
 
                     final GetSerialItemResponse.Item responseSerialItem = new GetSerialItemResponse.Item()
                             .setCsn(serialItem.getCsn())
@@ -189,8 +189,8 @@ public class ItemAgentImpl implements ItemAgent{
                             .setSerialItemId(serialItem.getSerialItemId())
                             .setSerialNumber(serialItem.getSerialNumber())
                             .setDescription(serialItem.getDescription())
-                            .setCreateUser(responseCreateUser)
-                            .setExpireUser(responseExpireUser);
+                            .setCreateUser(responseCreateUser);
+//                            .setExpireUser(responseExpireUser);
 
                     response.setItem(responseSerialItem);
                 }

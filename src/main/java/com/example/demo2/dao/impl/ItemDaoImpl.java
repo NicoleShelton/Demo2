@@ -105,15 +105,15 @@ public class ItemDaoImpl implements ItemDao {
             public Item extractData(ResultSet rs) throws SQLException, DataAccessException {
                 final Item serialItem;
                 if(rs.next()) {
-                    final String expireUserIdString = rs.getString("expire_user_id");
+//                    final String expireUserIdString = rs.getString("expire_user_id");
                     serialItem = new Item()
                             .setSerialItemId(rs.getLong("serial_item_id"))
                             .setId(rs.getLong("item_id"))
                             .setSerialNumber(rs.getString("serial_number"))
                             .setCsn(rs.getString("csn"))
                             .setDescription(rs.getString("description"))
-                            .setCreateUserId(rs.getLong("create_user_id"))
-                            .setExpireUserId(StringUtils.getLong(expireUserIdString));
+                            .setCreateUserId(rs.getLong("create_user_id"));
+//                            .setExpireUserId(StringUtils.getLong(expireUserIdString));
                 } else {
                     serialItem = null;
                 }
