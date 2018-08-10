@@ -1,15 +1,10 @@
 package com.example.demo2.model.internal;
 
+import com.example.demo2.model.internal.response.GetSerialItemResponse;
+
 import java.util.Date;
 
 public class Item {
-//    item_id INTEGER(50) NOT NULL PRIMARY KEY,
-//    csn VARCHAR(50) NOT NULL,
-//    description VARCHAR(255),
-//    create_user_id INTEGER(50) NOT NULL,
-//    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//    expire_user_id INTEGER(50),
-//    expire_date TIMESTAMP
 
     private Long id;
     private String csn;
@@ -62,6 +57,9 @@ public class Item {
         return this;
     }
 
+    private Long expireUserId;
+    private Date expireDate;
+
     public Long getExpireUserId() {
         return expireUserId;
     }
@@ -80,7 +78,24 @@ public class Item {
         return this;
     }
 
-    private Long expireUserId;
-    private Date expireDate;
+    private Long serialItemId;
+    private String serialNumber;
 
+    public Long getSerialItemId() {
+        return serialItemId;
+    }
+
+    public Item setSerialItemId(Long serialItemId) {
+        this.serialItemId = serialItemId;
+        return this;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public Item setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+        return this;
+    }
 }

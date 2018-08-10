@@ -4,7 +4,9 @@ INSERT INTO item (
   description,
   create_user_id,
   expire_user_id,
-  expire_date
+  expire_date,
+  serial_item_id,
+  serial_number,
 ) VALUES (
   (SELECT item_id_seq.NEXTVAL
    FROM dual),
@@ -12,5 +14,7 @@ INSERT INTO item (
   'iPhone X 256GB Space Gray',
   1,
   2,
-  SYSDATE + 1
+  SYSDATE + 1,
+  1,
+  12
 );

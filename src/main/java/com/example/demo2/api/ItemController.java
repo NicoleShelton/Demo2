@@ -3,8 +3,10 @@ package com.example.demo2.api;
 import com.example.demo2.agent.ItemAgent;
 import com.example.demo2.model.internal.request.CreateItemRequest;
 import com.example.demo2.model.internal.request.GetItemRequest;
+import com.example.demo2.model.internal.request.GetSerialItemRequest;
 import com.example.demo2.model.internal.response.CreateItemResponse;
 import com.example.demo2.model.internal.response.GetItemResponse;
+import com.example.demo2.model.internal.response.GetSerialItemResponse;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,5 +27,10 @@ public class ItemController {
     @RequestMapping(value = "/create-item", method = RequestMethod.POST)
     public CreateItemResponse createItem(@RequestBody CreateItemRequest request) {
         return itemAgent.createItem(request);
+    }
+
+    @RequestMapping(value = "/get-serial-item", method = RequestMethod.POST)
+    public GetSerialItemResponse getSerialItem(@RequestBody GetSerialItemRequest request) {
+        return itemAgent.getSerialItem(request);
     }
 }
