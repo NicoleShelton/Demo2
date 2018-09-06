@@ -2,7 +2,6 @@ package com.example.demo2.dao.impl;
 
 import com.example.demo2.dao.ItemDao;
 import com.example.demo2.model.internal.Item;
-import com.example.demo2.utility.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
@@ -88,37 +87,5 @@ public class ItemDaoImpl implements ItemDao {
                 .addValue("createUserId", createUserId);
 
         return namedParameterJdbcTemplate.update(sql, parameterSource) == 1;
-    }
-
-    @Override
-    public Item getSerialItemById(Long serialNumber) {
-        final String sql = "" +
-                " SELECT  serial_item_id, item_id, serial_number, csn, description, create_user_id, create_date, expire_user_id, expire_date " +
-                " FROM item " +
-                " WHERE serial_number = :serial_number";
-
-        final MapSqlParameterSource parameterSource = new MapSqlParameterSource()
-                .addValue("serial_number", serialNumber);
-
-        return namedParameterJdbcTemplate.query(sql, parameterSource, new ResultSetExtractor<Item>() {
-            @Override
-            public Item extractData(ResultSet rs) throws SQLException, DataAccessException {
-                final Item serialItem;
-                if(rs.next()) {
-//                    final String expireUserIdString = rs.getString("expire_user_id");
-                    serialItem = new Item()
-                            .setSerialItemId(rs.getLong("serial_item_id"))
-                            .setId(rs.getLong("item_id"))
-                            .setSerialNumber(rs.getString("serial_number"))
-                            .setCsn(rs.getString("csn"))
-                            .setDescription(rs.getString("description"))
-                            .setCreateUserId(rs.getLong("create_user_id"));
-//                            .setExpireUserId(StringUtils.getLong(expireUserIdString));
-                } else {
-                    serialItem = null;
-                }
-                return serialItem;
-            }
-        });
     }
 }

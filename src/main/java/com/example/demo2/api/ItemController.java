@@ -28,9 +28,4 @@ public class ItemController {
     public CreateItemResponse createItem(@RequestBody CreateItemRequest request) {
         return itemAgent.createItem(request);
     }
-
-    @RequestMapping(value = "/get-serial-item", method = RequestMethod.POST)
-    public GetSerialItemResponse getSerialItem(@RequestBody GetSerialItemRequest request) {
-        return itemAgent.getSerialItem(request);
-    }
 }

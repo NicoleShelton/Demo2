@@ -1,7 +1,5 @@
 package com.example.demo2.model.internal;
 
-import com.example.demo2.model.internal.response.GetSerialItemResponse;
-
 import java.util.Date;
 
 public class Item {
@@ -11,6 +9,8 @@ public class Item {
     private String description;
     private Long createUserId;
     private Date createDate;
+    private Long expireUserId;
+    private Date expireDate;
 
     public Long getId() {
         return id;
@@ -57,9 +57,6 @@ public class Item {
         return this;
     }
 
-    private Long expireUserId;
-    private Date expireDate;
-
     public Long getExpireUserId() {
         return expireUserId;
     }
@@ -75,27 +72,6 @@ public class Item {
 
     public Item setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
-        return this;
-    }
-
-    private Long serialItemId;
-    private String serialNumber;
-
-    public Long getSerialItemId() {
-        return serialItemId;
-    }
-
-    public Item setSerialItemId(Long serialItemId) {
-        this.serialItemId = serialItemId;
-        return this;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public Item setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
         return this;
     }
 }

@@ -8,6 +8,4 @@ public interface ItemDao {
     Long getItemIdNextValue();
 
     boolean createItem(Long itemId, String csn, String description, Long createUserId);
-
-    Item getSerialItemById(Long SerialNumber);
 }
