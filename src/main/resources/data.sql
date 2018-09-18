@@ -18,7 +18,7 @@ INSERT INTO serial_item (
   1,
   SYSDATE + 1,
   2,
-  1234567890
+  '1234567890'
 );
 
 INSERT INTO serial_item (
@@ -39,7 +39,7 @@ INSERT INTO serial_item (
   2,
   SYSDATE + 1,
   3,
-  2345678901
+  '2345678901'
 );
 
 INSERT INTO serial_item (
@@ -60,7 +60,7 @@ INSERT INTO serial_item (
   3,
   SYSDATE + 1,
   4,
-  3456789012
+  '3456789012'
 );
 
 INSERT INTO serial_item (
@@ -81,7 +81,7 @@ INSERT INTO serial_item (
   4,
   SYSDATE + 1,
   5,
-  4567890123
+  '4567890123'
 );
 
 
@@ -105,7 +105,7 @@ INSERT INTO item (
   1,
   SYSDATE + 1,
   2,
-  1234567890
+  '1234567890'
 );
 
 INSERT INTO item (
@@ -126,7 +126,7 @@ INSERT INTO item (
   2,
   SYSDATE + 1,
   3,
-  2345678901
+  '2345678901'
 );
 
 INSERT INTO item (
@@ -147,7 +147,7 @@ INSERT INTO item (
   3,
   SYSDATE + 1,
   4,
-  3456789012
+  '3456789012'
 );
 
 INSERT INTO item (
@@ -168,5 +168,5 @@ INSERT INTO item (
   4,
   SYSDATE + 1,
   5,
-  4567890123
+  '4567890123'
 );

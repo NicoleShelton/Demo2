@@ -14,7 +14,7 @@ CREATE SEQUENCE serial_item_seq;
 
 CREATE TABLE serial_item (
   serial_item_id INTEGER(50),
-  serial_number INTEGER(50),
+  serial_number VARCHAR(50),
   item_id INTEGER(50),
   create_user_id INTEGER(50),
   create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
